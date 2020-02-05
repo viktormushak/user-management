@@ -1,0 +1,18 @@
+version: "3"
+services:
+  visualizer:
+    image: dockersamples/visualizer
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "3500:8080"
+
+  web:
+    image: user-management
+    deploy:
+      replicas: 1
+    ports:
+      - "8081:8081"
